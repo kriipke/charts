@@ -1,0 +1,7 @@
+# The repo admins team will be the default owners for everything in the repo.
+# Unless a later match takes precedence, they will be requested for review when someone opens a pull request.
+* @myorg/repo_admins
+
+/charts/addons/ @myorg/kube_admins
+/charts/apps/app1 @developer1 @developer2
+/charts/apps/app2 @developer1 @developer2
