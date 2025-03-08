@@ -47,7 +47,7 @@ jobs:
          # -- CHECK IF EACH CHART HAS BEEN CHANGED         
          `echo $MODIFIED_FILES | grep -q "$i"` && { 
            echo HELM CHART CHANGED $i;
-           MODIFIED_CHARTS+=("$CHART_NAME")
+           MODIFIED_CHARTS+=(`realpath "$CHART_PATH")
          }
       
        done
