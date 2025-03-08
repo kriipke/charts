@@ -35,7 +35,7 @@ jobs:
 
        # CHECK IF EACH CHART HAS BEEN CHANGED
 
-       declare -A MODIFIED_CHARTS
+       declare -a MODIFIED_CHARTS
        
        for i in $HELM_CHARTS; do
 
@@ -52,9 +52,12 @@ jobs:
        done
        
        echo && echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
-
-       for element in "${MODIFIED_CHARTS[@]}"; do
-         echo $element
-       done
+       if [[ ${#MODIFIED_CHARTS[@]} -eq 0 ]]; then
+          echo "No modified charts found."
+       else
+          for element in "${MODIFIED_CHARTS[@]}"; do
+            echo "$element"
+          done
+       fi
 
 
