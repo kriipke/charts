@@ -1,6 +1,7 @@
 # Default values for helm-example.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+# this is a test
 
 replicaCount: 1
 
