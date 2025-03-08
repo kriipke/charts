@@ -15,6 +15,21 @@ entries:
     urls:
     - https://github.com/kriipke/charts/releases/download/argo-1.0.0/argo-1.0.0.tgz
     version: 1.0.0
+  emissary:
+  - apiVersion: v2
+    appVersion: 3.12.2
+    created: "2025-03-08T06:51:18.844785299Z"
+    dependencies:
+    - name: emissary-ingress
+      repository: https://app.getambassador.io
+      version: 8.12.2
+    description: Installs Emissary
+    digest: 47c22c4a89ee8592c373ea6ee2abb1360aeb6b749f6c2b0bb2b1f6861fdb9a83
+    name: emissary
+    type: application
+    urls:
+    - https://github.com/kriipke/charts/releases/download/emissary-0.1.0/emissary-0.1.0.tgz
+    version: 0.1.0
   helm-example:
   - apiVersion: v2
     appVersion: v0.0.1
@@ -146,4 +161,4 @@ entries:
     urls:
     - https://github.com/nakamasato/helm-charts/releases/download/mysql-operator-0.1.0/mysql-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-08T06:15:37.716424598Z"
+generated: "2025-03-08T06:51:18.84481243Z"
