@@ -41,7 +41,7 @@ jobs:
 
          CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
          CHART_NAME=`basename "$CHART_PATH"`
-         printf '\nchart: %s, path: %s' "$CHART_NAME\n" `realpath "$CHART_PATH"`
+         printf '\nchart: %s, path: %s' "$CHART_NAME" `realpath "$CHART_PATH"`
          
          `echo $MODIFIED_FILES | grep -q "$i"` && { 
            echo HELM CHART CHANGED $i;
@@ -51,7 +51,7 @@ jobs:
          
        done
        
-       echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
+       echo && echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
 
        for element in "${MODIFIED_CHARTS[@]}"; do
          echo $element
