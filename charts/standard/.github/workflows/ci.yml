@@ -1,0 +1,75 @@
+name: Linting & Running of Tests
+on: push
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4.2.0
+        with:
+          version: v3.14.4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          check-latest: true
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+
+
+      - name: Collect changes
+        id: collect-changes
+        uses: ./.github/actions/collect-changes
+
+
+
+      - name: Create commit
+        id: create-commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          file_pattern: .
+          commit_message: "chore: Auto-update chart README [skip ci]"
+          commit_user_name: mikevader[bot]
+          commit_user_email: mikevader[bot]@users.noreply.github.com
+          commit_author: mikevader[bot] <mikevader[bot]@users.noreply.github.com>
+
+      - name: Save commit hash
+        id: save-commit-hash
+        run: |
+          if [ "${{ steps.create-commit.outputs.changes_detected || 'unknown' }}" == "true" ]; then
+            echo "commit_hash=${{ steps.create-commit.outputs.commit_hash }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "commit_hash=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+          fi
+          
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          #changed=$(ct list-changed  --config ct.yaml --target-branch ${{ github.event.repository.default_branch }})
+          #if [[ -n "$changed" ]]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          #fi
+
+      - name: Run chart-testing (lint)
+        #if: steps.list-changed.outputs.changed == 'true'
+        run: ct lint  --lint-conf lintconf.yaml --config ct.yaml --target-branch ${{ github.event.repository.default_branch }}
+
+      - name: Create kind cluster
+        #if: steps.list-changed.outputs.changed == 'true'
+        uses: helm/kind-action@v1.10.0
+
+      - name: Run chart-testing (install)
+        #if: steps.list-changed.outputs.changed == 'true'
+        run: |
+          curl -sSL https://raw.githubusercontent.com/argoproj/argo-rollouts/master/manifests/crds/rollout-crd.yaml | kubectl apply -f -
+          kubectl create ns example
+          ct install  --helm-extra-set-args "--create-namespace" --config ct.yaml --target-branch ${{ github.event.repository.default_branch }}
+      - name: Run chart-testing (lint)
+        run: ct list-changed  --config ct.yaml --target-branch ${{ github.event.repository.default_branch }}

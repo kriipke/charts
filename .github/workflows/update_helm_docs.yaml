@@ -1,5 +1,4 @@
 name: Update Helm Docs
-
 on:
   workflow_dispatch:
   push:
@@ -8,12 +7,10 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   detect-changes:
     name: Detect Modified Helm Charts
     uses: ./.github/workflows/detect_chart_changes.yaml
-
   update-helm-docs:
     name: Update Helm Docs for Modified Charts
     needs: detect-changes
@@ -22,14 +19,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
       - name: Set Up Helm and helm-docs
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-          (cd /tmp/ && curl -L https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xzvf - -- helm-docs)
-          sudo cp /tmp/helm-docs /usr/bin/ 
-          sudo chmod +x /usr/bin/helm-docs
-
+        run: "curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash\n(cd /tmp/ && curl -L https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xzvf - -- helm-docs)\nsudo cp /tmp/helm-docs /usr/bin/ \nsudo chmod +x /usr/bin/helm-docs\n"
       - name: Generate Helm Docs
         run: |
           MODIFIED_CHARTS="${{ needs.detect-changes.outputs.modifiedCharts }}"
@@ -39,14 +30,12 @@ jobs:
             echo "Generating Helm docs for $CHART"
             helm-docs --chart-search-root "$CHART"
           done
-
       - name: Uploads READMEs as artifacts
         uses: actions/upload-artifact@v4
         with:
           name: docs
           path: |
             charts/*/README.md
-
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions"
@@ -59,4 +48,3 @@ jobs:
           else
             echo "No changes to commit"
           fi
-

@@ -1,5 +1,4 @@
 name: Detect Chart Changes
-
 on:
   workflow_dispatch:
   workflow_call:
@@ -15,16 +14,14 @@ jobs:
   chart-diff:
     name: Generate output
     runs-on: ubuntu-latest
-
     outputs:
       modifiedCharts: ${{ steps.gitdiff.outputs.charts }}
       modifiedFiles: ${{ steps.gitdiff.outputs.files }}
-      
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '2'
-          
+
       - name: Detect MODIFIED Helm charts
         id: gitdiff
         run: |
@@ -54,5 +51,5 @@ jobs:
           printf "\nMODIFIED_CHARTS:\n%s" "${MODIFIED_CHARTS[*]}"
           
           echo "files=$(echo $MODIFIED_FILES | paste -d, -s - )" >> $GITHUB_OUTPUT
-          echo "charts=$(IFS=',' && echo "${MODIFIED_CHARTS[*]}")" >> $GITHUB_OUTPUT
+          echo "charts=$(IFS=',' && echo ${MODIFIED_CHARTS[*]})" >> $GITHUB_OUTPUT
           

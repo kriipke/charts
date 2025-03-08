@@ -1,0 +1,11 @@
+{{- if .Values.grafana.dashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "chart-template.fullname" . }}-grafana-dashboard
+  labels:
+    {{- include "chart-template.labels" . | nindent 4 }}
+data:
+  example-dashboard.json: |-
+{{ .Files.Get "dashboards/example-dashboard.json" | indent 4 }}
+{{- end }}

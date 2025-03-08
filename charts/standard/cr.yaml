@@ -1,0 +1,9 @@
+version: v1.6.1
+charts_dir: .
+owner: kriipke
+git-repo: charts
+package-path: .
+git-base-url: https://api.github.com/
+git-upload-url: https://uploads.github.com/
+mark_as_latest: true
+packages_with_index: true

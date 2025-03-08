@@ -1,0 +1,1 @@
+env CR_OWNER=kriipke CR_GIT_REPO=charts CR_PACKAGE_PATH=.cr-release-packages  cr package  --config cr.yaml . 

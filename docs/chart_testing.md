@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Charts testing](#charts-testing)
+  - [Pull request testing](#pull-request-testing)
+  - [Custom test values](#custom-test-values)
+  - [Running tests locally](#running-tests-locally)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Charts testing
 
 ## Pull request testing
@@ -26,5 +37,5 @@ For examples, take a look at the existing tests in this repository.
   - `helm plugin install https://github.com/helm-unittest/helm-unittest`
 - Run linter and yaml validation
   - `ct lint-and-install`
-- Run unit tests: 
+- Run unit tests:
   - `helm unittest charts/newrelic-logging`

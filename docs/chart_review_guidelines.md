@@ -1,3 +1,34 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Chart Review Guidelines](#chart-review-guidelines)
+  - [1. <a name='Immutability'></a>Immutability](#1-a-nameimmutabilityaimmutability)
+  - [2. <a name='Versioning'></a>Versioning](#2-a-nameversioningaversioning)
+  - [3. <a name='Compatibility'></a>Compatibility](#3-a-namecompatibilityacompatibility)
+  - [4. <a name='Chartmetadata'></a>Chart metadata](#4-a-namechartmetadataachart-metadata)
+  - [5. <a name='Dependencies'></a>Dependencies](#5-a-namedependenciesadependencies)
+  - [6. <a name='Metadata'></a>Resource Metadata Labels](#6-a-namemetadataaresource-metadata-labels)
+  - [7. <a name='Labels'></a>Labels](#7-a-namelabelsalabels)
+    - [7.1. <a name='DeploymentsStatefulSetsDaemonSetsSelectors'></a>Deployments, StatefulSets, DaemonSets Selectors](#71-a-namedeploymentsstatefulsetsdaemonsetsselectorsadeployments-statefulsets-daemonsets-selectors)
+      - [7.1.1. <a name='Fixingselectors'></a>Fixing selectors](#711-a-namefixingselectorsafixing-selectors)
+        - [For `Deployments`, `StatefulSets`, `DaemonSets` `apps/v1beta1` or `extensions/v1beta1`](#for-deployments-statefulsets-daemonsets-appsv1beta1-or-extensionsv1beta1)
+        - [For `Deployments`, `StatefulSets`, `DaemonSets` >= `apps/v1beta2`](#for-deployments-statefulsets-daemonsets--appsv1beta2)
+    - [7.2. <a name='Serviceselectors'></a>Service selectors](#72-a-nameserviceselectorsaservice-selectors)
+    - [7.3. <a name='PersistenceLabels'></a>Persistence Labels](#73-a-namepersistencelabelsapersistence-labels)
+      - [7.3.1. <a name='StatefulSet'></a>StatefulSet](#731-a-namestatefulsetastatefulset)
+      - [7.3.2. <a name='PersistentVolumeClaim'></a>PersistentVolumeClaim](#732-a-namepersistentvolumeclaimapersistentvolumeclaim)
+  - [8. <a name='Configuration'></a>Configuration](#8-a-nameconfigurationaconfiguration)
+  - [9. <a name='Kubernetesnativeworkloads'></a>Kubernetes native workloads](#9-a-namekubernetesnativeworkloadsakubernetes-native-workloads)
+    - [10. <a name='Persistence'></a>Persistence](#10-a-namepersistenceapersistence)
+    - [11. <a name='AutoScalingHorizontalPodAutoscaler'></a>AutoScaling / HorizontalPodAutoscaler](#11-a-nameautoscalinghorizontalpodautoscaleraautoscaling--horizontalpodautoscaler)
+    - [12. <a name='Ingress'></a>Ingress](#12-a-nameingressaingress)
+  - [13. <a name='Formatting'></a>Formatting](#13-a-nameformattingaformatting)
+  - [14. <a name='Documentation'></a>Documentation](#14-a-namedocumentationadocumentation)
+  - [15. <a name='Tests'></a>Tests](#15-a-nametestsatests)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Chart Review Guidelines
 
 The process to get a pull request merged is fairly simple. First, all required tests need to pass, and you must have signed our CLA. For details on our CI, see the [Charts testing GitHub action](https://github.com/helm/chart-testing-action).
@@ -26,13 +57,13 @@ Chart releases must be immutable. Once the manifests for an application becomes 
 
  - **environment specific secrets**, e.g. API keys, database creds, etc
  - **storage configuration**, e.g. NFS servers, Kubernetes CSI drivers, etc
- - **HTTP_PROXY** host for the environment 
+ - **HTTP_PROXY** host for the environment
  - Miscellaneous config values that may be required
 
 [INFO]However, __the majority of the values in that comprise the Helm Chart should be defined as __defaults__ in the default `values.yaml`_
 
 
-  
+
  -  to Any change to a chart warrants a chart version bump even if it is only changed to the documentation.
 
 ##  2. <a name='Versioning'></a>Versioning

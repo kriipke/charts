@@ -270,4 +270,4 @@ Red Hat Communities of Practice
 
 -   [ redhat-cop](https://github.com/redhat-cop)
 
-We are a community of Red Hatters committed to levelling up our skillsets and the skillsets of our partners and customers through open source practices.%
+We are a community of Red Hatters committed to levelling up our skillsets and the skillsets of our partners and customers through open source practices.

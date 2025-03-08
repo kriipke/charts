@@ -1,10 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [`values.yaml` Conventions](#valuesyaml-conventions)
+  - [Images](#images)
+  - [Labels](#labels)
+  - [HPA](#hpa)
+  - [Resrouces](#resrouces)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # `values.yaml` Conventions
 
 ```yaml
 grafana:
   dashboard:
     enabled: true
-    
+
 replicaCount: 1
 
 image:
@@ -96,7 +108,7 @@ image:
   pullPolicy: IfNotPresent
   tag: ""
 ```
-The image specification should always have the exact structure above in the default `values.yaml` for your chart. 
+The image specification should always have the exact structure above in the default `values.yaml` for your chart.
 
 This `.Values.image` must always be placed at the top level of the `values.yaml`. This container image and this Helm Chart should have an intimate connection.
 
