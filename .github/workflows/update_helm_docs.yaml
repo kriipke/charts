@@ -12,7 +12,7 @@ on:
 jobs:
   detect-changes:
     name: Detect Modified Helm Charts
-    uses: ./.github/workflows/detect_chart_changes.yml
+    uses: ./.github/workflows/detect_chart_changes.yaml
 
   update-helm-docs:
     name: Update Helm Docs for Modified Charts
