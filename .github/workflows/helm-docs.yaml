@@ -43,7 +43,6 @@ jobs:
          echo CHART_PATH $CHART_PATH
 
           `echo $MODIFIED_FILES | grep -q "$i"` && {echo HELM CHART CHANGED $i; MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$CHART_PATH")"
-          fi
        done
        echo MODIFIED_CHARTS: $MODIFIED_CHARTS
 
