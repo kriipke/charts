@@ -1,4 +1,3 @@
-# This supports shell glob matching, relative path matching, and
 # negation (prefixed with !). Only one pattern pe
 .DS_Store
 # Common VCS dirs
