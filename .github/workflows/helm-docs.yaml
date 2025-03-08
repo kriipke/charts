@@ -38,7 +38,7 @@ jobs:
        do
           echo $MODIFIED_FILES | grep -q "$i"
 
-          if [[ echo $MODIFIED_FILES | grep -q "$i" ]]; then
+          if `echo $MODIFIED_FILES | grep -q "$i"`; then
             echo HELM CHART CHANGED $i
             MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$i")"
           fi
