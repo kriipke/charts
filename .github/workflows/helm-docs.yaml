@@ -24,58 +24,68 @@ jobs:
         
     - run: |
        (cd $(mktemp -d); curl -sSL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xzvf - ; cp helm-docs /tmp/)
-       
-    - run: |
-       CHART_DIRS=`find ./charts -maxdepth 1 -type d` && echo $CHART_DIRS
-       REPO_ROOT=`git rev-parse --show-toplevel`
 
-       HELM_CHARTS="$(find  ${REPO_ROOT}/charts -mindepth 1 -maxdepth 1 -type d -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
-       printf "\nHELM_CHARTS:\n%s" "$HELM_CHARTS"
-       
-       MODIFIED_FILES="$(git diff --name-only HEAD HEAD~1)"
-       printf "\nMODIFIED_FILES:\n%s" "$MODIFIED_FILES"
+    - name: Generate README.md files with helm-docs
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        CHART_DIRS=`find ./charts -maxdepth 1 -type d` && echo $CHART_DIRS
+        REPO_ROOT=`git rev-parse --show-toplevel`
 
-       declare -a MODIFIED_CHARTS
+        HELM_CHARTS="$(find  ${REPO_ROOT}/charts -mindepth 1 -maxdepth 1 -type d -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
+        printf "\nHELM_CHARTS:\n%s" "$HELM_CHARTS"
        
-       
-       for i in $HELM_CHARTS; do
+        MODIFIED_FILES="$(git diff --name-only HEAD HEAD~1)"
+        printf "\nMODIFIED_FILES:\n%s" "$MODIFIED_FILES"
 
-         CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
-         CHART_NAME=`basename "$CHART_PATH"`
-         printf '\nchart: %s, path: %s' "$CHART_NAME" `realpath "$CHART_PATH"`
+        declare -a MODIFIED_CHARTS
+       
+       
+        for i in $HELM_CHARTS; do
+
+          CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
+          CHART_NAME=`basename "$CHART_PATH"`
+          printf '\nchart: %s, path: %s' "$CHART_NAME" `realpath "$CHART_PATH"`
       
-         # -- CHECK IF EACH CHART HAS BEEN CHANGED         
-         `echo $MODIFIED_FILES | grep -q "$i"` && { 
-           echo HELM CHART CHANGED $i;
-           MODIFIED_CHARTS+=(`realpath "$CHART_PATH"`)
-         }
+          # -- CHECK IF EACH CHART HAS BEEN CHANGED         
+          `echo $MODIFIED_FILES | grep -q "$i"` && { 
+            echo HELM CHART CHANGED $i;
+            MODIFIED_CHARTS+=(`realpath "$CHART_PATH"`)
+          }
       
-       done
+        done
        
-       echo && echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
-       if [[ ${#MODIFIED_CHARTS[@]} -eq 0 ]]; then
-          echo "No modified charts found."
-       else
-         HELM_DOCS_CMD="/tmp/helm-docs --chart-search-root ${REPO_ROOT}/charts --chart-to-generate $(echo ${MODIFIED_CHARTS[@]} | tr ' ' ,)"
-         echo $HELM_DOCS_CMD
-         $HELM_DOCS_CMD
-       fi
+        echo && echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
+        if [[ ${#MODIFIED_CHARTS[@]} -eq 0 ]]; then
+           echo "No modified charts found."
+        else
+          HELM_DOCS_CMD="/tmp/helm-docs --chart-search-root ${REPO_ROOT}/charts --chart-to-generate $(echo ${MODIFIED_CHARTS[@]} | tr ' ' ,)"
+          echo $HELM_DOCS_CMD
+          $HELM_DOCS_CMD
+        fi
 
-       for chart in "${MODIFIED_CHARTS[@]}"; do
-          cat $chart/README.md
-       done
+        for chart in "${MODIFIED_CHARTS[@]}"; do
+           cat $chart/README.md
+        done
        
+        #git config user.name "$GITHUB_ACTOR"
+        #git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        #git add ${REPO_ROOT}/charts
+        #git commit -m "Generated Chart READMEs for ${MODIFIED_CHARTS[@]}"
+        #git push origin main  
+      
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: readmes
+        name: docs
         path: |
           charts/*/README.md
           
     - run: |
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-        git add ${REPO_ROOT}/charts
+        git diff
+        git add .
         git commit -m "Generated Chart READMEs for ${MODIFIED_CHARTS[@]}"
         git push origin main
       env:
