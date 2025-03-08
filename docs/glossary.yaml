@@ -1,0 +1,162 @@
+glossary:
+  - term: Continuous Integration (CI)
+    definition: "A development practice where developers frequently merge code changes into a shared repository, followed by automated builds and tests."
+
+  - term: Continuous Deployment (CD)
+    definition: "A software release process where validated changes are automatically deployed to production without human intervention."
+
+  - term: Continuous Delivery
+    definition: "A practice ensuring that code is always in a deployable state, with manual approval before pushing to production."
+
+  - term: GitOps
+    definition: "A methodology that uses Git as the single source of truth for defining and automating infrastructure and application deployments."
+
+  - term: Infrastructure as Code (IaC)
+    definition: "Managing and provisioning infrastructure through machine-readable definition files instead of manual processes."
+
+  - term: Helm
+    definition: "A package manager for Kubernetes that simplifies deployment and management of applications through Helm charts."
+
+  - term: Helm Chart
+    definition: "A pre-configured application description in YAML format that facilitates repeatable Kubernetes deployments."
+
+  - term: Kubernetes Operator
+    definition: "A method of packaging, deploying, and managing Kubernetes applications using custom controllers."
+
+  - term: Argo CD
+    definition: "A declarative GitOps continuous delivery tool for Kubernetes."
+
+  - term: Argo Rollouts
+    definition: "A Kubernetes controller for progressive delivery strategies like blue-green, canary, and experimentation."
+
+  - term: Blue-Green Deployment
+    definition: "A release management strategy where two production environments exist to reduce downtime during updates."
+
+  - term: Canary Deployment
+    definition: "A phased release strategy where changes are rolled out to a small subset of users before full deployment."
+
+  - term: Progressive Delivery
+    definition: "A modern deployment strategy that gradually releases features with mechanisms like canary and blue-green deployments."
+
+  - term: Kustomize
+    definition: "A Kubernetes-native configuration management tool that allows customization without modifying the base manifest."
+
+  - term: Flux
+    definition: "A GitOps-based continuous delivery tool for Kubernetes that automates deployments from Git repositories."
+
+  - term: Secret Management
+    definition: "A practice of securely storing and managing sensitive information such as API keys, credentials, and certificates."
+
+  - term: HashiCorp Vault
+    definition: "A tool for securely storing and accessing secrets and sensitive data."
+
+  - term: RBAC (Role-Based Access Control)
+    definition: "A security model in Kubernetes that restricts access based on roles and permissions."
+
+  - term: Service Mesh
+    definition: "A dedicated infrastructure layer for handling service-to-service communications, security, and observability."
+
+  - term: Istio
+    definition: "A service mesh that provides traffic management, security, and observability for microservices."
+
+  - term: Envoy
+    definition: "A high-performance proxy designed for microservice architectures and used as the data plane in service meshes."
+
+  - term: Kubernetes Admission Controller
+    definition: "A mechanism that intercepts requests to the Kubernetes API server before objects are persisted in the cluster."
+
+  - term: Kubernetes Custom Resource Definition (CRD)
+    definition: "An extension of Kubernetes that allows users to define their own API objects."
+
+  - term: Prometheus
+    definition: "An open-source monitoring and alerting toolkit designed for reliability in cloud-native environments."
+
+  - term: Grafana
+    definition: "An open-source visualization tool for creating dashboards and analyzing metrics from Prometheus and other data sources."
+
+  - term: OpenTelemetry
+    definition: "A set of APIs, libraries, and agents used for observability, collecting traces, metrics, and logs."
+
+  - term: Kubernetes Resource Limits
+    definition: "Mechanisms to control CPU and memory usage of pods to prevent resource exhaustion."
+
+  - term: Horizontal Pod Autoscaler (HPA)
+    definition: "A Kubernetes feature that automatically scales the number of pods based on CPU/memory utilization."
+
+  - term: Vertical Pod Autoscaler (VPA)
+    definition: "A Kubernetes mechanism that automatically adjusts CPU and memory requests/limits for pods."
+
+  - term: Cluster Autoscaler
+    definition: "A component that automatically adjusts the number of nodes in a Kubernetes cluster based on resource demand."
+
+  - term: CI/CD Pipeline
+    definition: "An automated workflow that manages software development, testing, and deployment stages."
+
+  - term: Webhook
+    definition: "A mechanism that allows external services to trigger events in response to repository changes."
+
+  - term: Kubernetes Operator Pattern
+    definition: "A method of extending Kubernetes capabilities by automating complex application management."
+
+  - term: Kubernetes Namespace
+    definition: "A virtual cluster within a Kubernetes cluster that isolates workloads and resources."
+
+  - term: Persistent Volume (PV)
+    definition: "A storage resource in Kubernetes that retains data beyond the lifecycle of a pod."
+
+  - term: Persistent Volume Claim (PVC)
+    definition: "A request for storage by a user that binds to a persistent volume."
+
+  - term: ConfigMap
+    definition: "A Kubernetes object used to store non-sensitive configuration data as key-value pairs."
+
+  - term: Kubernetes Secret
+    definition: "A Kubernetes object for storing sensitive data, such as passwords, API keys, or tokens."
+
+  - term: Pod Disruption Budget (PDB)
+    definition: "A Kubernetes feature that specifies the minimum available pods during voluntary disruptions."
+
+  - term: Sidecar Pattern
+    definition: "A microservices design pattern where an additional container provides supporting functionality within a pod."
+
+  - term: StatefulSet
+    definition: "A Kubernetes workload API for managing stateful applications, ensuring stable pod identities."
+
+  - term: DaemonSet
+    definition: "A Kubernetes workload that ensures a specific pod runs on all (or some) nodes in the cluster."
+
+  - term: Deployment
+    definition: "A Kubernetes API resource for managing the desired state of replicated applications."
+
+  - term: GitHub Actions
+    definition: "A CI/CD tool built into GitHub for automating workflows based on repository events."
+
+  - term: Jenkins
+    definition: "An open-source automation server for building, testing, and deploying applications."
+
+  - term: Tekton
+    definition: "A cloud-native CI/CD framework for Kubernetes, providing a flexible pipeline execution model."
+
+  - term: Harbor
+    definition: "A cloud-native container image registry that secures and manages artifacts."
+
+  - term: Trivy
+    definition: "An open-source vulnerability scanner for containers and infrastructure as code."
+
+  - term: SBOM (Software Bill of Materials)
+    definition: "A detailed inventory of software components, dependencies, and versions used in a build."
+
+  - term: Policy as Code
+    definition: "The practice of defining and enforcing security and compliance policies using code."
+
+  - term: Open Policy Agent (OPA)
+    definition: "A policy engine for enforcing rules across Kubernetes, CI/CD pipelines, and cloud services."
+
+  - term: Falco
+    definition: "A runtime security tool for detecting unexpected application behavior in Kubernetes environments."
+
+  - term: Supply Chain Security
+    definition: "The process of securing dependencies, CI/CD pipelines, and infrastructure to prevent supply chain attacks."
+
+  - term: SBOM Attestation
+    definition: "A signed statement that verifies the integrity and authenticity of a software artifact."
