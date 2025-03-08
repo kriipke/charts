@@ -22,41 +22,43 @@ jobs:
       with:
         fetch-depth: '2'
         
-    - run: curl -sSL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xzvf - && ls -l
+    - run: |
+       (cd $(mktemp -d); curl -sSL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xzvf - ; cp helm-docs /usr/bin/)
+       
     - run: |
        CHART_DIRS=`find ./charts -maxdepth 1 -type d` && echo $CHART_DIRS
        REPO_ROOT=`git rev-parse --show-toplevel`
 
        HELM_CHARTS="$(find  ${REPO_ROOT}/charts -mindepth 1 -maxdepth 1 -type d -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
-       echo "HELM_CHARTS:" "$HELM_CHARTS"
+       printf "\nHELM_CHARTS:\n%s" "$HELM_CHARTS"
+       
        MODIFIED_FILES="$(git diff --name-only HEAD HEAD~1)"
-       echo MODIFIED_FILES $MODIFIED_FILES 
-
-       # CHECK IF EACH CHART HAS BEEN CHANGED
+       printf "\nMODIFIED_FILES:\n%s" "$MODIFIED_FILES"
 
        declare -a MODIFIED_CHARTS
+       
        
        for i in $HELM_CHARTS; do
 
          CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
          CHART_NAME=`basename "$CHART_PATH"`
          printf '\nchart: %s, path: %s' "$CHART_NAME" `realpath "$CHART_PATH"`
-         
+      
+         # -- CHECK IF EACH CHART HAS BEEN CHANGED         
          `echo $MODIFIED_FILES | grep -q "$i"` && { 
            echo HELM CHART CHANGED $i;
            MODIFIED_CHARTS+=("$CHART_NAME")
-           echo MODIFIED_CHARTS_JUSTADDED "${MODIFIED_CHARTS[@]}"
          }
-         
+      
        done
        
        echo && echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
        if [[ ${#MODIFIED_CHARTS[@]} -eq 0 ]]; then
           echo "No modified charts found."
        else
-          for element in "${MODIFIED_CHARTS[@]}"; do
-            echo "$element"
-          done
+         HELM_DOCS_CMD="helm-docs --chart-search-root ${REPO_ROOT}/charts --chart-to-generate $(echo ${MODIFIED_CHARTS[@]} | tr ' ' ,)"
+         echo $HELM_DOCS_CMD
+         $HELM_DOCS_CMD
        fi
 
 
