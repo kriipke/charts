@@ -189,4 +189,15 @@ entries:
     urls:
     - https://github.com/nakamasato/helm-charts/releases/download/mysql-operator-0.1.0/mysql-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-08T08:07:30.802720327Z"
+  traefik:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-03-08T08:53:55.683835202Z"
+    description: Installs Traefik
+    digest: 4982c82b08b3dc0898e92defc3e87a72fb3b88cf351ba11acbeef24adfce5a82
+    name: traefik
+    type: application
+    urls:
+    - https://github.com/kriipke/charts/releases/download/traefik-0.1.0/traefik-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-03-08T08:53:55.683865158Z"
