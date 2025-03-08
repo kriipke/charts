@@ -35,14 +35,25 @@ jobs:
 
        # CHECK IF EACH CHART HAS BEEN CHANGED
 
-       MODIFIED_CHARTS=""
+       deckare -A MODIFIED_CHARTS
+       
        for i in $HELM_CHARTS; do
 
-         echo CHART_NAME "$i" 
          CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
-         echo CHART_PATH $CHART_PATH
-
-          `echo $MODIFIED_FILES | grep -q "$i"` && { echo HELM CHART CHANGED $i; MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$CHART_PATH")";}
+         CHART_NAME=`basename "$CHART_PATH"`
+         printf 'chart: %s, path: %s' "$CHART_NAME" `realpath "$CHART_PATH"`
+         
+         `echo $MODIFIED_FILES | grep -q "$i"` && { 
+           echo HELM CHART CHANGED $i;
+           MODIFIED_CHARTS+=(`basename "$CHART_PATH"`)
+         }
+         
        done
-       echo MODIFIED_CHARTS: $MODIFIED_CHARTS
+       
+       echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
+
+       for element in "${MODIFIED_CHARTS[@]}"; do
+         echo $element
+       done
+
 
