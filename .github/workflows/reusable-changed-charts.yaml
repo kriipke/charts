@@ -1,8 +1,8 @@
-name: Determine Modified Helm Charts
+name: Detect Chart Changes
 
 on:
+  workflow_dispatch:
   workflow_call:
-    # Map the workflow outputs to job outputs
     outputs:
       modifiedCharts:
         description: "List of Helm Charts changed since the last commit"
@@ -15,11 +15,16 @@ jobs:
   chart-diff:
     name: Generate output
     runs-on: ubuntu-latest
-    # Map the job outputs to step outputs
+
     outputs:
       modifiedCharts: ${{ steps.gitdiff.outputs.charts }}
       modifiedFiles: ${{ steps.gitdiff.outputs.files }}
+      
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '2'
+          
       - name: Detect MODIFIED Helm charts
         id: gitdiff
         run: |
