@@ -8,16 +8,11 @@ on:
   pull_request:
     branches: [ master, main ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v3
       with:
         fetch-depth: '2'
@@ -55,7 +50,10 @@ jobs:
           }
       
         done
-       
+
+        # access in later jobs
+        echo "${MODIFIED_CHARTS[@]}" > /tmp/modified-charts
+        
         echo && echo MODIFIED_CHARTS: "${MODIFIED_CHARTS[@]}"
         if [[ ${#MODIFIED_CHARTS[@]} -eq 0 ]]; then
            echo "No modified charts found."
@@ -83,6 +81,7 @@ jobs:
           charts/*/README.md
           
     - run: |
+        cat /tmp/modified-charts
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git diff
