@@ -2,4 +2,3 @@ createDefaultListeners: true
 daemonSet: true
 canary:
   enabled: true
-  # test
