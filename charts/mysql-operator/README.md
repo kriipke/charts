@@ -1,5 +1,5 @@
 # [mysql-operator](https://github.com/nakamasato/mysql-operator)
-test
+
 ## Values
 
 1. **cloudSecretManagerType**: `raw` or `gcp`. With `raw`, you need to give root user password in `MySQL` custom resource. With `gcp`, you can securely store root user password in GCP SecretManager. This root user password is used to manage (create/edit/update) MySQL users, databases, etc.
