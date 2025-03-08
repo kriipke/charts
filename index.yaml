@@ -1,5 +1,20 @@
 apiVersion: v1
 entries:
+  argo:
+  - apiVersion: v2
+    created: "2025-03-08T06:06:01.834921227Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 7.8.8
+    - name: argo-rollouts
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.39.0
+    digest: 6fd272fb6b50b0535618d0725527f4104cb683048394feea5af915f4e61d2fc2
+    name: argo
+    urls:
+    - https://github.com/kriipke/charts/releases/download/argo-1.0.0/argo-1.0.0.tgz
+    version: 1.0.0
   helm-example:
   - apiVersion: v2
     appVersion: v0.0.1
@@ -30,6 +45,21 @@ entries:
     type: application
     urls:
     - https://github.com/nakamasato/helm-charts/releases/download/helm-example-0.1.0/helm-example-0.1.0.tgz
+    version: 0.1.0
+  metallb:
+  - apiVersion: v2
+    appVersion: 0.14.9
+    created: "2025-03-08T06:06:01.970592651Z"
+    dependencies:
+    - name: metallb
+      repository: https://metallb.github.io/metallb
+      version: 0.14.9
+    description: Installs MetalLB + Emissary to provide a loadbalanced IP for Ingress
+    digest: 12ae31e34b574028b86f5e14d2152847cf0f95a93de247ca1e887dc3c10e29d7
+    name: metallb
+    type: application
+    urls:
+    - https://github.com/kriipke/charts/releases/download/metallb-0.1.0/metallb-0.1.0.tgz
     version: 0.1.0
   mysql-operator:
   - apiVersion: v2
@@ -102,4 +132,4 @@ entries:
     urls:
     - https://github.com/nakamasato/helm-charts/releases/download/mysql-operator-0.1.0/mysql-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-02T03:16:35.3136764Z"
+generated: "2025-03-08T06:06:01.970611166Z"
