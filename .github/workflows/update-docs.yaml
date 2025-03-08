@@ -1,0 +1,56 @@
+name: Update Helm Docs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  detect-changes:
+    name: Detect Modified Helm Charts
+    uses: ./.github/workflows/detect_chart_changes.yml
+
+  update-helm-docs:
+    name: Update Helm Docs for Modified Charts
+    needs: detect-changes
+    runs-on: ubuntu-latest
+    if: needs.detect-changes.outputs.modifiedCharts != ''
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Helm and helm-docs
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+          wget https://github.com/norwoodj/helm-docs/releases/latest/download/helm-docs-linux-amd64
+          chmod +x helm-docs-linux-amd64
+          sudo mv helm-docs-linux-amd64 /usr/local/bin/helm-docs
+
+      - name: Generate Helm Docs
+        run: |
+          MODIFIED_CHARTS="${{ needs.detect-changes.outputs.modifiedCharts }}"
+          IFS=',' read -ra CHART_DIRS <<< "$MODIFIED_CHARTS"
+
+          for CHART in "${CHART_DIRS[@]}"; do
+            echo "Generating Helm docs for $CHART"
+            helm-docs --chart-search-root "$CHART"
+          done
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          if [[ `git status --porcelain` ]]; then
+            git add charts/**/README.md
+            git commit -m "Update Helm docs for modified charts"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
