@@ -14,7 +14,7 @@
 
 ## Usage
 
-### Dryrun
+### Dryrundd
 
 You can check the final yaml with `--dry-run`:
 
