@@ -51,8 +51,8 @@ jobs:
             }
           done
           
-          printf "\nMODIFIED_CHARTS:\n%s" "$MODIFIED_CHARTS[*]"
+          printf "\nMODIFIED_CHARTS:\n%s" "${MODIFIED_CHARTS[*]}"
           
           echo "files=$(echo $MODIFIED_FILES | paste -d, -s - )" >> $GITHUB_OUTPUT
-          echo "charts=$(IFS=',' && echo "$MODIFIED_CHARTS[*]")" >> $GITHUB_OUTPUT
+          echo "charts=$(IFS=',' && echo "${MODIFIED_CHARTS[*]}")" >> $GITHUB_OUTPUT
           
