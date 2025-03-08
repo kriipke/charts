@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v3
     - run: curl -sSL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xzvf - && ls -l
     - run: |
-       HELM_CHARTS="$(find  ${REPO_ROOT}/charts   -type dir -d 1 -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
+       HELM_CHARTS="$(find  ${REPO_ROOT}/charts   -type d -d 1 -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
        MODIFIED_FILES="$(git diff --name-only HEAD HEAD~1)"
        # CHECK IF EACH CHART HAS BEEN CHANGED
        for i in $HELM_CHARTS;
