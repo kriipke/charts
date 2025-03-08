@@ -41,11 +41,12 @@ jobs:
 
          CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
          CHART_NAME=`basename "$CHART_PATH"`
-         printf 'chart: %s, path: %s' "$CHART_NAME" `realpath "$CHART_PATH"`
+         printf '\nchart: %s, path: %s' "$CHART_NAME\n" `realpath "$CHART_PATH"`
          
          `echo $MODIFIED_FILES | grep -q "$i"` && { 
            echo HELM CHART CHANGED $i;
-           MODIFIED_CHARTS+=(`basename "$CHART_PATH"`)
+           MODIFIED_CHARTS+=("$CHART_NAME")
+           echo MODIFIED_CHARTS_JUSTADDED "${MODIFIED_CHARTS[@]}"
          }
          
        done
