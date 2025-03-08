@@ -19,7 +19,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v3
-    - run: curl -sSL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xvf helm-docs - && mv helm-docs /usr/bin && cd charts/dfe && helm-docs .
+    - run: curl -sSL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xvf - && mv helm-docs /usr/bin 
     - run: |
        HELM_CHARTS="$(find  ${REPO_ROOT}/charts   -type dir -d 1 -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
        MODIFIED_FILES="$(git diff --name-only HEAD HEAD~1)"
