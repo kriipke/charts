@@ -1,8 +1,0 @@
-#test
-replicaCount: 1
-
-nginx:
-  image:
-    repository: nginx
-    pullPolicy: IfNotPresent
-    tag: "1.14.0"

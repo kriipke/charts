@@ -1,6 +1,7 @@
 apiVersion: v2
 name: argo
 version: 1.0.0
+maintainer: kriipke@protonmail.com
 dependencies:
   - name: argo-cd
     version: 7.8.8

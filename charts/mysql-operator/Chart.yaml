@@ -1,9 +1,0 @@
-apiVersion: v2
-name: mysql-operator
-description: A Helm chart for Kubernetes
-
-type: application
-
-version: v0.3.3
-
-appVersion: "v0.3.3"
