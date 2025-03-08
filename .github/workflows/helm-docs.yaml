@@ -36,8 +36,9 @@ jobs:
        for i in $HELM_CHARTS;
        do
           if grep -q "$i" "$MODIFIED_FILES"; then
-            echo HELM CHART CHANGED: $i
+            echo HELM CHART CHANGED $i
             MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$i")"
+          fi
        done
        echo MODIFIED_CHARTS:
        echo $MODIFIED_CHARTS
