@@ -42,7 +42,7 @@ jobs:
             REL_CHART_PATH="$i"       
             ABS_CHART_PATH="$(realpath "$i")"
             
-            printf '\nchart: %s,\tpath: %s' `basename "$RELATIVE_CHART_PATH"` "$ABS_CHART_PATH"
+            printf '\nchart: %s,\tpath: %s' `basename "$REL_CHART_PATH"` "$ABS_CHART_PATH"
   
             # -- CHECK IF EACH CHART HAS BEEN CHANGED         
             `echo $MODIFIED_FILES | grep -q "$REL_CHART_PATH"` && { 
