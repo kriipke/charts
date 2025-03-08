@@ -4,6 +4,12 @@
 
 Installs MetalLB
 
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| kriipke | <kriipke@ziinc.dev> |  |
+
 ## Requirements
 
 | Repository | Name | Version |
