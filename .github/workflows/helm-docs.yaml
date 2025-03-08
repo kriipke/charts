@@ -61,4 +61,26 @@ jobs:
          $HELM_DOCS_CMD
        fi
 
+       for chart in "${MODIFIED_CHARTS[@]}"; do
+          cd ${REPO_ROOT}/charts/$chart
+          git add ${REPO_ROOT}/charts/$chart/README.md
+          cat ${REPO_ROOT}/charts/$chart/README.md
+       done
+       
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: readmes
+        path: |
+          charts/*/README.md
+          
+    - run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git add ${REPO_ROOT}/charts
+        git commit -m "Generated Chart READMEs for ${MODIFIED_CHARTS[@]}"
+        git push origin main
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
