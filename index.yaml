@@ -49,6 +49,20 @@ entries:
   metallb:
   - apiVersion: v2
     appVersion: 0.14.9
+    created: "2025-03-08T06:15:37.716408477Z"
+    dependencies:
+    - name: metallb
+      repository: https://metallb.github.io/metallb
+      version: 0.14.9
+    description: Installs MetalLB
+    digest: 5bfb4ce89c07efe96e08dc2df52f902f0f1308a520d369a42f7e1d4fe420ded8
+    name: metallb
+    type: application
+    urls:
+    - https://github.com/kriipke/charts/releases/download/metallb-0.1.1/metallb-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.14.9
     created: "2025-03-08T06:06:01.970592651Z"
     dependencies:
     - name: metallb
@@ -132,4 +146,4 @@ entries:
     urls:
     - https://github.com/nakamasato/helm-charts/releases/download/mysql-operator-0.1.0/mysql-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-08T06:06:01.970611166Z"
+generated: "2025-03-08T06:15:37.716424598Z"
