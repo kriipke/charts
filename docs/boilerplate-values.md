@@ -1,3 +1,5 @@
+# `values.yaml` Conventions
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
@@ -9,8 +11,6 @@
   - [Resrouces](#resrouces)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# `values.yaml` Conventions
 
 ```yaml
 grafana:
