@@ -27,8 +27,9 @@ jobs:
        CHART_DIRS=`find ./charts -maxdepth 1 -type d` && echo $CHART_DIRS
        REPO_ROOT=`git rev-parse --show-toplevel`
 
-       HELM_CHARTS="$(find  ${REPO_ROOT}/charts -maxdepth 1 -type d  -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
-       HELM_CHARTS=$( echo $HELM_CHARTS | tail -n +2 )
+       HELM_CHARTS="$(find  ${REPO_ROOT}/charts -maxdepth 1 -type d -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
+       HELM_CHARTS=$( echo "$HELM_CHARTS" | tail -n +2 )
+       echo "HELM_CHARTS:" "$HELM_CHARTS"
        MODIFIED_FILES="$(git diff --name-only HEAD HEAD~1)"
        echo MODIFIED_FILES $MODIFIED_FILES 
 
