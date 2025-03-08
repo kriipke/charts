@@ -42,9 +42,7 @@ jobs:
          CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
          echo CHART_PATH $CHART_PATH
 
-          if `echo $MODIFIED_FILES | grep -q "$i"`; then
-            echo HELM CHART CHANGED $i
-            MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$i")"
+          `echo $MODIFIED_FILES | grep -q "$i"` && {echo HELM CHART CHANGED $i; MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$CHART_PATH")"
           fi
        done
        echo MODIFIED_CHARTS: $MODIFIED_CHARTS
