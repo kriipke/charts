@@ -1,8 +1,8 @@
 apiVersion: v2
 name: metallb
-description: Installs MetalLB + Emissary to provide a loadbalanced IP for Ingress
+description: Installs MetalLB
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "0.14.9"
 dependencies:
   - name: metallb
