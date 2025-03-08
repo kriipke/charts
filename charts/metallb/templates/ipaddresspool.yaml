@@ -6,7 +6,7 @@ metadata:
 spec:
   addresses:
   - {{ .Values.ingress.ip }}/32
-  autoAssign: false
+  autoAssign: true
   namespaceSelectors:
     - matchLabels:
         ipaddresspool: ingress
