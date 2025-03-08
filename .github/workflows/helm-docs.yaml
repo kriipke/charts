@@ -29,13 +29,16 @@ jobs:
 
        HELM_CHARTS="$(find  ${REPO_ROOT}/charts -maxdepth 1 -type d  -exec  realpath --relative-to="$REPO_ROOT" {} \;)"
        MODIFIED_FILES="$(git diff --name-only HEAD HEAD~1)"
+       echo $MODIFIED_FILES 
+
        # CHECK IF EACH CHART HAS BEEN CHANGED
 
        MODIFIED_CHARTS=""
-
        for i in $HELM_CHARTS;
        do
-          if grep -q "$i" "$MODIFIED_FILES"; then
+          echo $MODIFIED_FILES | grep -q "$i"
+
+          if [[ echo $MODIFIED_FILES | grep -q "$i" ]]; then
             echo HELM CHART CHANGED $i
             MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$i")"
           fi
