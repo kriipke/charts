@@ -1,4 +1,4 @@
-name: Generate Helm README.md
+name: README Generator
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -22,7 +22,8 @@ jobs:
       with:
         fetch-depth: '2'
         
-    - run: |
+    - name: Download helm-docs binary    
+      run: |
        (cd $(mktemp -d); curl -sSL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz | tar -xzvf - ; cp helm-docs /tmp/)
 
     - name: Generate README.md files with helm-docs
@@ -49,8 +50,8 @@ jobs:
       
           # -- CHECK IF EACH CHART HAS BEEN CHANGED         
           `echo $MODIFIED_FILES | grep -q "$i"` && { 
-            echo HELM CHART CHANGED $i;
-            MODIFIED_CHARTS+=(`realpath "$CHART_PATH"`)
+            printf "\nHELM CHART CHANGED: %s" "$i";
+            MODIFIED_CHARTS+=("$(realpath "$i")")
           }
       
         done
