@@ -37,8 +37,9 @@ jobs:
        MODIFIED_CHARTS=""
        for i in $HELM_CHARTS;
        do
-          echo $MODIFIED_FILES | grep -q "$i"
-
+         echo $MODIFIED_FILES | grep -q "$i"
+         CHART_PATH=`realpath --relative-to="$REPO_ROOT" "$i"`
+         echo CHAR_PATH $CHART_PATH
           if `echo $MODIFIED_FILES | grep -q "$i"`; then
             echo HELM CHART CHANGED $i
             MODIFIED_CHARTS="$MODIFIED_CHARTS:$(basename "$i")"
