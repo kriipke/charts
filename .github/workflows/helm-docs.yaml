@@ -62,9 +62,7 @@ jobs:
        fi
 
        for chart in "${MODIFIED_CHARTS[@]}"; do
-          cd ${REPO_ROOT}/charts/$chart
-          git add ${REPO_ROOT}/charts/$chart/README.md
-          cat ${REPO_ROOT}/charts/$chart/README.md
+          cat $chart/README.md
        done
        
     - name: Archive production artifacts
