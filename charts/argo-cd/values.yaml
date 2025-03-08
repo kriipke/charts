@@ -1,6 +1,24 @@
 argo-cd:
 
-  extraObjects: []
+  extraObjects:
+    - apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: appset-bootstrap
+        namespace: argo-cd
+      spec:
+        project: default
+        source:
+          repoURL: https://github.com/kriipke/gitops
+          targetRevision: HEAD
+          path: bootstrap
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: argo-cd
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true  
 
   dex:
     enabled: true
