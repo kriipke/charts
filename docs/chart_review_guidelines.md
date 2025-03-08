@@ -1,4 +1,4 @@
-# Chart review guidelines
+# Chart Review Guidelines
 
 The process to get a pull request merged is fairly simple. First, all required tests need to pass, and you must have signed our CLA. For details on our CI, see the [Charts testing GitHub action](https://github.com/helm/chart-testing-action).
 
