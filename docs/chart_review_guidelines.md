@@ -22,7 +22,18 @@ If problems arise with some part of the test, such as timeout issues, contact on
 
 ##  1. <a name='Immutability'></a>Immutability
 
-Chart releases must be immutable. Any change to a chart warrants a chart version bump even if it is only changed to the documentation.
+Chart releases must be immutable. Once the manifests for an application becomes relatively stable the use of the values exposed in the `values.yaml` should be used only to provide environment-specific variables such as:
+
+ - **environment specific secrets**, e.g. API keys, database creds, etc
+ - **storage configuration**, e.g. NFS servers, Kubernetes CSI drivers, etc
+ - **HTTP_PROXY** host for the environment 
+ - Miscellaneous config values that may be required
+
+[INFO]However, __the majority of the values in that comprise the Helm Chart should be defined as __defaults__ in the default `values.yaml`_
+
+
+  
+ -  to Any change to a chart warrants a chart version bump even if it is only changed to the documentation.
 
 ##  2. <a name='Versioning'></a>Versioning
 
