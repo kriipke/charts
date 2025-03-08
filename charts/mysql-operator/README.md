@@ -17,7 +17,7 @@
 ### Dryrundd
 
 You can check the final yaml with `--dry-run`:
-
+ff
 ```
 helm install mysql-operator ./charts/mysql-operator \
     --dry-run \
